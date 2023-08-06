@@ -44,7 +44,16 @@ Route::get('/test', function()
     return view('layouts.admin');
 });
 
-Route::get('/test', function()
+
+
+
+// Admin panel:
+Route::group(['prefix' => 'admin','middleware'=> ['auth']],function()
 {
-    return view('admin.dashboard.index');
-});
+    Route::get('/dashboard', function()
+    {
+        return view('admin.dashboard.index');
+    });
+    Route::resource('location', LocationController::class);
+}
+);
