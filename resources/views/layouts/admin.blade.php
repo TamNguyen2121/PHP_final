@@ -14,6 +14,7 @@
   <link rel="stylesheet" href="{{ asset('admin')}}/css/adminlte.min.css">
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 </head>
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
@@ -189,15 +190,21 @@
               </li>
             </ul>
           </li>
-          <li class="nav-item">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-th"></i>
+          <li class="nav-item mt-auto ">
+            <a href="{{ route('location.index') }}" class="nav-link">
+              <i class="nav-icon fas fa-location-arrow"></i>
               <p>
-                Simple Link
-                <span class="right badge badge-danger">New</span>
+                Location 
               </p>
             </a>
           </li>
+            {{-- <li class="nav-item mt-auto bg-danger">
+              <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit()" class="nav-link">
+                <i class="nav-icon fas fas fa-sign-out-alt"></i>
+                <p>
+                  Logout
+                </p>
+          </li> --}}
         </ul>
       </nav>
       <!-- /.sidebar-menu -->
@@ -243,5 +250,11 @@
 <script src="{{ asset('admin')}}/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- AdminLTE App -->
 <script src="{{ asset('admin')}}/js/adminlte.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+<script>
+  @if(Session::has('success'))
+  toastr.success("{{ Session::get('success') }}");
+  @endif
+</script>
 </body>
 </html>
