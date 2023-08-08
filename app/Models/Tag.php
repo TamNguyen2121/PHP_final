@@ -5,9 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class location extends Model
+class Tag extends Model
 {
-    // use HasFactory;
-
     protected $guarded =['create_at', 'updated_at', 'deleted_at'];
 }

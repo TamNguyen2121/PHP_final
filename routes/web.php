@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\LocationController;
+use App\Http\Controllers\TagController;
 use App\Models\location;
 use Illuminate\Support\Facades\Route;
 
@@ -58,5 +59,6 @@ Route::group(['prefix' => 'admin'],function()
     });
     Route::resource('location', LocationController::class);
     // route::resource('location','LocationController');
+    Route::resource('Tag',TagController::class);
 }
 );
