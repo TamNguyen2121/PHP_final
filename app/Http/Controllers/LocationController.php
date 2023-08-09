@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Session;
 use App\Models\location;
 use Illuminate\Http\Request;
 
@@ -12,8 +13,9 @@ class LocationController extends Controller
      */
     public function index()
     {
-        return 'hello';
-        echo "hello";
+        $location=location::orderBy('created_at','ASC')->paginate(20);
+        return view('admin.Location.index', compact('location'));
+       
     }
 
     /**
@@ -21,7 +23,7 @@ class LocationController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.location.create');
     }
 
     /**
@@ -29,7 +31,20 @@ class LocationController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // dd($request->all());
+        //validation
+        $this->validate($request,[
+            'name' =>'required|unique:locations,name',
+        ]);
+
+        $location= location::create([
+            'name'=>$request->name,
+            'Address'=>$request->address,
+        ]);
+
+        Session::flash('success','Location created successfully');
+
+        return redirect()->back();
     }
 
     /**
@@ -37,7 +52,7 @@ class LocationController extends Controller
      */
     public function show(location $location)
     {
-        //
+        
     }
 
     /**
@@ -45,7 +60,7 @@ class LocationController extends Controller
      */
     public function edit(location $location)
     {
-        //
+        return view('admin.Location.edit', compact('location'));
     }
 
     /**
@@ -53,7 +68,18 @@ class LocationController extends Controller
      */
     public function update(Request $request, location $location)
     {
-        //
+        // dd($request->all());
+        $this->validate($request,[
+            'name' =>"required|unique:locations,name,$location->name",
+        ]);
+
+        $location->name = $request->name;
+        $location->Address = $request->address;
+        $location->save();
+
+        Session::flash('success','Location updated successfully');
+
+        return redirect()->back();
     }
 
     /**
@@ -61,6 +87,13 @@ class LocationController extends Controller
      */
     public function destroy(location $location)
     {
-        //
+        // return $location;
+        If($location){
+            $location->delete();
+            Session::flash('success','Location deleted successfully');
+
+            return redirect()->route('location.index');
+                
+        }
     }
 }

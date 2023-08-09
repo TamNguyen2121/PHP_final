@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\LocationController;
+use App\Http\Controllers\TagController;
+use App\Models\location;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -33,7 +36,7 @@ Route::get('/contact', function()
 Route::get('/home', function()
 {
     return view('website.home');
-});
+})->name('website');
 Route::get('/post', function()
 {
     return view('website.post');
@@ -48,12 +51,14 @@ Route::get('/test', function()
 
 
 // Admin panel:
-Route::group(['prefix' => 'admin','middleware'=> ['auth']],function()
+Route::group(['prefix' => 'admin'],function()
 {
     Route::get('/dashboard', function()
     {
         return view('admin.dashboard.index');
     });
     Route::resource('location', LocationController::class);
+    // route::resource('location','LocationController');
+    Route::resource('Tag',TagController::class);
 }
 );
