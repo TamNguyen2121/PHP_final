@@ -4,12 +4,12 @@
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-6">
-          <h1 class="m-0 text-dark">Tags</h1>
+          <h1 class="m-0 text-dark">Posts</h1>
         </div><!-- /.col -->
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
             <li class="breadcrumb-item"><a href="{{ route('website') }}">Home</a></li>
-            <li class="breadcrumb-item active">Tags list</li>
+            <li class="breadcrumb-item active">Posts list</li>
           </ol>
         </div><!-- /.col -->
       </div><!-- /.row -->
@@ -24,8 +24,8 @@
             <div class="card">
                 <div class="card-header ">
                 <div class="d-flex justify-content-between align-items-center">
-                    <h3 class="card-title">Tag List</h3>
-                    <a href="{{ route('Tag.create') }}" class="btn btn-primary">Create Tag</a>
+                    <h3 class="card-title">Post List</h3>
+                    <a href="{{ route('post.create') }}" class="btn btn-primary">Create post</a>
                 </div>
                 </div>
                 
@@ -34,23 +34,29 @@
                 <thead>
                 <tr>
                 <th style="width: 10px">#</th>
-                <th>Name</th>
-                <th>Description</th>
-               
+                <th>Image</th>
+                <th>Title</th>
+                <th>Location</th>
+                <th>Author</th>
                 <th style="width: 40px">Action</th>
                 </tr>
                 </thead>
                 <tbody>
-                  @if($Tag->count())
-                @foreach($Tag as $Tag)
+                  @if($post->count())
+                @foreach($post as $post)
                 <tr>
-                <td>{{ $Tag->id }}</td>
-                <td>{{ $Tag->name }}</td>
-                <td>{{ $Tag->description }}</td>
-              
+                <td>{{ $post->id }}</td>
+                <td>
+                  <div style="max-width:70px; max-height:70px; overflow:hidden">
+                    <img src="{{ asset($post->image) }}" class="img-fluid" alt="">
+                  </div>
+                </td>
+                <td>{{ $post->title }}</td>
+                <td>{{ $post->location_id }}</td>
+                <td>{{ $post->user_id }}</td>
                 <td class="d-flex">
-                  <a href="{{ route('Tag.edit', [$Tag->id]) }}" class="btn btn-sm btn-primary mr-1"><i class="fas fa-edit"></i></a>
-                  <form action="{{ route('Tag.destroy',[$Tag->id])}}" class="mr-1" method="POST">
+                  <a href="{{ route('post.edit', [$post->id]) }}" class="btn btn-sm btn-primary mr-1"><i class="fas fa-edit"></i></a>
+                  <form action="{{ route('post.destroy',[$post->id])}}" class="mr-1" method="POST">
                     @method('DELETE')
                     @csrf
                     <button type="submit" class="btn btn-sm btn-danger "><i class="fas fa-trash"></i></button>
@@ -62,7 +68,7 @@
                 @else
                 <tr>
                   <td colspan="5">
-                    <h5 class="text-center">No Tags found.</h5>
+                    <h5 class="text-center">No posts found.</h5>
                   </td>
                 </tr>
 

@@ -41,6 +41,7 @@
                 </tr>
                 </thead>
                 <tbody>
+                  @if($location->count())
                 @foreach($location as $location)
                 <tr>
                 <td>{{ $location->id }}</td>
@@ -60,7 +61,14 @@
             
                 </tr>
                 @endforeach
-                
+                @else
+                <tr>
+                  <td colspan="5">
+                    <h5 class="text-center">No Locations found.</h5>
+                  </td>
+                </tr>
+
+                @endif
                 </tbody>
                 </table>
                 </div>

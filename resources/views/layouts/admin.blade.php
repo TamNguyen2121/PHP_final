@@ -206,6 +206,14 @@
               </p>
             </a>
           </li>
+          <li class="nav-item mt-auto ">
+            <a href="{{ route('post.index') }}" class="nav-link">
+              <i class="nav-icon fas fa-pen-nib"></i>
+              <p>
+                Post
+              </p>
+            </a>
+          </li>
             {{-- <li class="nav-item mt-auto bg-danger">
               <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit()" class="nav-link">
                 <i class="nav-icon fas fas fa-sign-out-alt"></i>
@@ -258,11 +266,16 @@
 <script src="{{ asset('admin')}}/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- AdminLTE App -->
 <script src="{{ asset('admin')}}/js/adminlte.min.js"></script>
+<script src="{{ asset('admin')}}/js/bs-custom-file-input.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 <script>
   @if(Session::has('success'))
   toastr.success("{{ Session::get('success') }}");
   @endif
+
+  $(document).ready(function () {
+  bsCustomFileInput.init()
+   })
 </script>
 </body>
 </html>
