@@ -6,6 +6,8 @@ use App\Http\Controllers\TagController;
 use App\Models\location;
 use App\Models\Tag;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\FrontendController;
+use App\Models\Contact;
 
 /*
 |--------------------------------------------------------------------------
@@ -49,21 +51,21 @@ Route::get('/test', function()
     return view('layouts.admin');
 });
 
-
-
+// Route::post('/contact', 'FrontendController@send_message') ->name('website.contact');
+Route::post('/contact', [FrontendController::class, 'send_message'])->name('website.contact');
 
 // Admin panel:
-Route::group(['prefix' => 'admin'],function()
-{
-    Route::get('/dashboard', function()
-    {
-        return view('admin.dashboard.index');
-    });
-    Route::resource('location', LocationController::class);
-    // route::resource('location','LocationController');
-    Route::resource('Tag',TagController::class);
-    Route::resource('post',PostController::class );
+// Route::group(['prefix' => 'admin'],function()
+// {
+//     Route::get('/dashboard', function()
+//     {
+//         return view('admin.dashboard.index');
+//     });
+//     Route::resource('location', LocationController::class);
+//     // route::resource('location','LocationController');
+//     Route::resource('Tag',TagController::class);
+//     Route::resource('post',PostController::class );
 
     
-}
-);
+// } 
+// );
