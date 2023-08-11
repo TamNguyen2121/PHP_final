@@ -19,7 +19,7 @@ class FrontendController extends Controller
 
         $contact = Contact::create($request->all());
 
-        Session::flash('success','Contact message send successfully');
+        Session::flash('message-send','Contact message send successfully');
         return redirect()->back();
     }
 }
