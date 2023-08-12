@@ -17,7 +17,8 @@ return new class extends Migration
             $table->string('description')->nullable();
             $table->timestamps();
         });
-    }
+
+}
 
     /**
      * Reverse the migrations.
@@ -25,5 +26,6 @@ return new class extends Migration
     public function down(): void
     {
         Schema::dropIfExists('tags');
+
     }
 };
