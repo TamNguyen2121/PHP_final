@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Contact;
 use Illuminate\Http\Request;
+use Session;
 
 class ContactController extends Controller
 {
@@ -12,7 +13,18 @@ class ContactController extends Controller
      */
     public function index()
     {
-        //
+        // $messages = Contact::latest()->get();
+        // if($key = request()->key) {
+        //     $messages = Contact::latest()->where('name','like','%'.$key.'%')->get();
+        // }
+        $messageKey = request()->messageKey;
+        $messages = Contact::latest()->when($messageKey, function ($query) use ($messageKey) {
+            $query->where('id', '=', $messageKey)
+                  ->orWhere('name', 'like', '%' . $messageKey . '%')
+                  ->orWhere('email', 'like', '%' . $messageKey . '%')
+                  ->orWhere('message', 'like', '%' . $messageKey . '%');
+        })->get();
+        return view('admin.contact.index', compact('messages'));
     }
 
     /**
@@ -28,15 +40,22 @@ class ContactController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Contact $contact)
+    public function show($id)
     {
-        //
+            $contact = Contact::find($id);
+
+            if($contact) {
+                return view('admin.contact.show', compact('contact'));
+            } else {
+                Session::flash('error', 'Contact message not found.');
+                return redirect()->route('dashboard');
+            }
     }
 
     /**
@@ -58,8 +77,19 @@ class ContactController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Contact $contact)
+    public function destroy($id)
     {
-        //
+        $contact = Contact::find($id);
+        if($contact) {
+            if(file_exists(public_path($contact->image))) {
+                unlink(public_path($contact->image));
+            }
+
+            $contact->delete();
+            Session::flash('delete_message','Message deleted successfully');
+            }
+        
+        return redirect()->back();
     }
 }
+    

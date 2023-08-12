@@ -1,25 +1,26 @@
 @extends('layouts.admin')
 @section('content')
+
 <div class="content-header">
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-6">
-          <h1 class="m-0 text-dark">Posts</h1>
+          <h1 class="m-0 text-dark">Messages</h1>
         </div><!-- /.col -->
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
             <li class="breadcrumb-item"><a href="{{ route('website') }}">Home</a></li>
-            <li class="breadcrumb-item active">Posts list</li>
+            <li class="breadcrumb-item active">Message list</li>
           </ol>
         </div><!-- /.col -->
       </div><!-- /.row -->
     </div><!-- /.container-fluid -->
   </div>
 
-  <!-- SEARCH FORM -->
+<!-- SEARCH FORM -->
 <form class="form-inline ml-3" action="" method="GET">
 <div class="input-group input-group-sm">
-  <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search" name="postKey">
+  <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search" name="messageKey">
   <div class="input-group-append">
     <button class="btn btn-primary" type="submit">
       <i class="fas fa-search"></i>
@@ -28,7 +29,6 @@
 </div>
 </form>
 <br>
-
   <!-- /.content-header -->
    <!-- Main content -->
    <div class="content">
@@ -38,8 +38,8 @@
             <div class="card">
                 <div class="card-header ">
                 <div class="d-flex justify-content-between align-items-center">
-                    <h3 class="card-title">Post List</h3>
-                    <a href="{{ route('post.create') }}" class="btn btn-primary">Create post</a>
+                    <h3 class="card-title">Message List</h3>
+                    <!-- <a href="{{ route('post.create') }}" class="btn btn-primary">Create post</a> -->
                 </div>
                 </div>
                 
@@ -48,29 +48,26 @@
                 <thead>
                 <tr>
                 <th style="width: 10px">#</th>
+                <th>Name</th>
+                <th>Email</th>
                 <th>Image</th>
-                <th>Title</th>
-                <th>Location</th>
-                <th>Author</th>
+                <th>Message</th>
                 <th style="width: 40px">Action</th>
                 </tr>
                 </thead>
                 <tbody>
-                  @if($post->count())
-                @foreach($post as $post)
+                  @if($messages->count())
+                @foreach($messages as $message)
                 <tr>
-                <td>{{ $post->id }}</td>
-                <td>
-                  <div style="max-width:70px; max-height:70px; overflow:hidden">
-                    <img src="{{ asset($post->image) }}" class="img-fluid" alt="">
-                  </div>
-                </td>
-                <td>{{ $post->title }}</td>
-                <td>{{ $post->location_id }}</td>
-                <td>{{ $post->user_id }}</td>
+                <td>{{ $message->id }}</td>
+                <td>{{ $message->name }}</td>
+                <td>{{ $message->email }}</td>
+                <td>{{ $message->image }}</td>
+                <td>{{ Str::limit($message->message, 120, '...') }}</td>
+
                 <td class="d-flex">
-                  <a href="{{ route('post.edit', [$post->id]) }}" class="btn btn-sm btn-primary mr-1"><i class="fas fa-edit"></i></a>
-                  <form action="{{ route('post.destroy',[$post->id])}}" class="mr-1" method="POST">
+                <a href="{{ route('contact.show', ['id' => $message->id]) }}" class="btn btn-sm btn-success mr-1"><i class="fas fa-eye"></i></a>
+                  <form action="{{ route('contact.destroy',['id' => $message->id])}}" class="mr-1" method="POST">
                     @method('DELETE')
                     @csrf
                     <button type="submit" class="btn btn-sm btn-danger "><i class="fas fa-trash"></i></button>

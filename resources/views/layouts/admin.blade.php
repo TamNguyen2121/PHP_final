@@ -35,16 +35,16 @@
     </ul>
 
     <!-- SEARCH FORM -->
-    <form class="form-inline ml-3">
+    <!-- <form class="form-inline ml-3" action="" method="GET">
       <div class="input-group input-group-sm">
-        <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
+        <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search" name="query">
         <div class="input-group-append">
           <button class="btn btn-navbar" type="submit">
             <i class="fas fa-search"></i>
           </button>
         </div>
       </div>
-    </form>
+    </form> -->
 
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
@@ -214,6 +214,15 @@
               </p>
             </a>
           </li>
+          <li class="nav-item mt-auto ">
+            <a href="{{ route('contact.index') }}" class="nav-link">
+              <i class="nav-icon fas fa-envelope"></i>
+              <p>
+                Message
+              </p>
+            </a>
+          </li>
+
             {{-- <li class="nav-item mt-auto bg-danger">
               <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit()" class="nav-link">
                 <i class="nav-icon fas fas fa-sign-out-alt"></i>
@@ -279,3 +288,4 @@
 </script>
 </body>
 </html>
+

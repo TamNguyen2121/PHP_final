@@ -14,7 +14,20 @@ class PostController extends Controller
      */
     public function index()
     {
-        $post = Post::orderBy('created_at','ASC')->paginate(20);
+        // $post = Post::orderBy('created_at','ASC')->paginate(20);
+        $postKey = request()->input('post_key');
+        $postQuery = Post::orderBy('created_at', 'ASC');
+    
+        if ($postKey) {
+            $postQuery->where(function ($subQuery) use ($postKey) {
+                $subQuery->where('id', '=', $postKey)
+                         ->orWhere('title', 'like', '%' . $postKey . '%')
+                         ->orWhere('location', 'like', '%' . $postKey . '%')
+                         ->orWhere('author', 'like', '%' . $postKey . '%');
+            });
+        }
+    
+        $post = $postQuery->paginate(20);
         return view('admin.Post.index',compact('post'));
     }
 

@@ -13,7 +13,20 @@ class LocationController extends Controller
      */
     public function index()
     {
-        $location=location::orderBy('created_at','ASC')->paginate(20);
+        // $location=location::orderBy('created_at','ASC')->paginate(20);
+        $locationKey = request()->input('locationKey');
+        $locationQuery = Location::orderBy('created_at', 'ASC');
+    
+        if ($locationKey) {
+            $locationQuery->where(function ($subQuery) use ($locationKey) {
+                $subQuery->where('id', '=', $locationKey)
+                         ->orWhere('name', 'like', '%' . $locationKey . '%')
+                         ->orWhere('address', 'like', '%' . $locationKey . '%');
+                        //  ->orWhere('postcount', 'like', '%' . $locationKey . '%');
+            });
+        }
+    
+        $location = $locationQuery->paginate(20);
         return view('admin.Location.index', compact('location'));
        
     }

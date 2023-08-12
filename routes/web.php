@@ -8,6 +8,7 @@ use App\Models\Tag;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FrontendController;
 use App\Models\Contact;
+use App\Http\Controllers\ContactController;
 
 /*
 |--------------------------------------------------------------------------
@@ -55,17 +56,31 @@ Route::get('/test', function()
 Route::post('/contact', [FrontendController::class, 'send_message'])->name('website.contact');
 
 // Admin panel:
-// Route::group(['prefix' => 'admin'],function()
-// {
-//     Route::get('/dashboard', function()
-//     {
-//         return view('admin.dashboard.index');
-//     });
-//     Route::resource('location', LocationController::class);
-//     // route::resource('location','LocationController');
-//     Route::resource('Tag',TagController::class);
-//     Route::resource('post',PostController::class );
+Route::group(['prefix' => 'admin'],function()
+{
+    Route::get('/dashboard', function()
+    {
+        return view('admin.dashboard.index');
+    });
+    Route::resource('location', LocationController::class);
+    // route::resource('location','LocationController');
+    Route::resource('Tag',TagController::class);
+    Route::resource('post',PostController::class );
 
-    
-// } 
-// );
+    // Contact
+    // Route::get('/contact','ContactController@index')->name('contact.index');
+    Route::get('/contact', [ContactController::class, 'index'])->name('contact.index');
+    Route::get('/contact/show/{id}', [ContactController::class, 'show'])->name('contact.show');
+    Route::delete('/contact/delete/{id}', [ContactController::class, 'destroy'])->name('contact.destroy');
+
+    Route::get('/search', [FrontendController::class, 'search'])->name('search.result');
+
+} 
+);
+
+
+    Route::get('/search', function()
+{
+    return view('website.search');
+});
+
