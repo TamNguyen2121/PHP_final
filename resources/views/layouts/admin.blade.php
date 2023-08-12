@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
 
-  <title>AdminLTE 3 | Starter</title>
+  <title>Admin_TravelExplorer</title>
 
   <!-- Font Awesome Icons -->
   <link rel="stylesheet" href="{{ asset('admin')}}/plugins/fontawesome-free/css/all.min.css">
@@ -15,6 +15,7 @@
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+  @yield('style')
 </head>
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
@@ -147,7 +148,7 @@
     <a href="index3.html" class="brand-link">
       <img src="{{ asset('admin')}}/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
            style="opacity: .8">
-      <span class="brand-text font-weight-light">AdminLTE 3</span>
+      <span class="brand-text font-weight-light">TravelExplorer</span>
     </a>
 
     <!-- Sidebar -->
@@ -194,7 +195,7 @@
             <a href="{{ route('location.index') }}" class="nav-link">
               <i class="nav-icon fas fa-location-arrow"></i>
               <p>
-                Location 
+                Locations 
               </p>
             </a>
           </li>
@@ -210,7 +211,7 @@
             <a href="{{ route('post.index') }}" class="nav-link">
               <i class="nav-icon fas fa-pen-nib"></i>
               <p>
-                Post
+                Posts
               </p>
             </a>
           </li>
@@ -249,11 +250,11 @@
   <!-- Main Footer -->
   <footer class="main-footer">
     <!-- To the right -->
-    <div class="float-right d-none d-sm-inline">
+    {{-- <div class="float-right d-none d-sm-inline">
       Anything you want
-    </div>
+    </div> --}}
     <!-- Default to the left -->
-    <strong>Copyright &copy; 2014-2019 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved.
+    <strong>Group9 &copy; Admin <a href="https://www.instagram.com/travelexplorer/">TravelExplorer</a>.</strong> All rights reserved.
   </footer>
 </div>
 <!-- ./wrapper -->
@@ -268,6 +269,7 @@
 <script src="{{ asset('admin')}}/js/adminlte.min.js"></script>
 <script src="{{ asset('admin')}}/js/bs-custom-file-input.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+@yield('script')
 <script>
   @if(Session::has('success'))
   toastr.success("{{ Session::get('success') }}");

@@ -38,7 +38,7 @@
                   @csrf
                   <div class="card-body">
                     @include('includes.errors')
-                  <div class="form-group">
+                  <div class="form-group d-flex flex-wrap">
                   <label for="name">Tag name</label>
                   <input type="name" name="name" class="form-control" id="name" placeholder="Enter name" fdprocessedid="qqjxn7">
                   </div>

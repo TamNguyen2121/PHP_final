@@ -49,7 +49,7 @@
                   </div>
                   </div>
               
-                  <div class="card-footer">
+                  <div class="form-group">
                   <button type="submit" class="btn btn-lg btn-primary" fdprocessedid="xtpjg">Update Location</button>
                   </div>
                   </form>
