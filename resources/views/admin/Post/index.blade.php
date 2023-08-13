@@ -51,6 +51,7 @@
                 <th>Image</th>
                 <th>Title</th>
                 <th>Location</th>
+                <th>Tags</th>
                 <th>Author</th>
                 <th style="width: 40px">Action</th>
                 </tr>
@@ -66,9 +67,16 @@
                   </div>
                 </td>
                 <td>{{ $post->title }}</td>
-                <td>{{ $post->location_id }}</td>
-                <td>{{ $post->user_id }}</td>
+                <td>{{ $post->location->name }}</td>
+                <td>
+                  @foreach($post->Tag as $T)
+                  <span class="badge badge-primary"> {{ $T->name }} </span>
+                  @endforeach
+                  
+                </td>
+                <td>{{ $post->account->username }}</td>
                 <td class="d-flex">
+                  <a href="{{ route('post.show', [$post->id]) }}" class="btn btn-sm btn-success mr-1"> <i class="fas fa-eye"></i> </a>
                   <a href="{{ route('post.edit', [$post->id]) }}" class="btn btn-sm btn-primary mr-1"><i class="fas fa-edit"></i></a>
                   <form action="{{ route('post.destroy',[$post->id])}}" class="mr-1" method="POST">
                     @method('DELETE')
