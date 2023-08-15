@@ -13,6 +13,7 @@ class LocationController extends Controller
      */
     public function index()
     {
+        Session::put('page','location');
         $location=location::orderBy('created_at','ASC')->paginate(20);
         return view('admin.Location.index', compact('location'));
        

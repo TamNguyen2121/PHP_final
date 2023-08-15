@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AccountController;
 use App\Http\Controllers\LocationController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\TagController;
@@ -55,6 +56,29 @@ Route::get('/test', function()
 Route::post('/contact', [FrontendController::class, 'send_message'])->name('website.contact');
 
 // Admin panel:
+Route::prefix('/admin')->namespace('App\Http\Controllers')->group(function(){
+    
+    Route::match(['get','post'],'login','AccountController@login');
+    Route::group(['middleware'=>['account']], function(){
+        Route::get('dashboard','AccountController@dashboard');
+        Route::match(['get','post'],'profile','AccountController@profile');
+        Route::get('logout','AccountController@logout');
+        Route::resource('location', LocationController::class);
+        Route::resource('Tag',TagController::class);
+        Route::resource('post',PostController::class );
+        
+    });
+        
+});
+    
+
+
+
+
+
+
+
+
 // Route::group(['prefix' => 'admin'],function()
 // {
 //     Route::get('/dashboard', function()
