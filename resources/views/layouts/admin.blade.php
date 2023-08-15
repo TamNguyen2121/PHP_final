@@ -46,99 +46,6 @@
         </div>
       </div>
     </form>
-
-    <!-- Right navbar links -->
-    <ul class="navbar-nav ml-auto">
-      <!-- Messages Dropdown Menu -->
-      <li class="nav-item dropdown">
-        <a class="nav-link" data-toggle="dropdown" href="#">
-          <i class="far fa-comments"></i>
-          <span class="badge badge-danger navbar-badge">3</span>
-        </a>
-        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-          <a href="#" class="dropdown-item">
-            <!-- Message Start -->
-            <div class="media">
-              <img src="{{ asset('admin')}}/img/user1-128x128.jpg" alt="User Avatar" class="img-size-50 mr-3 img-circle">
-              <div class="media-body">
-                <h3 class="dropdown-item-title">
-                  Brad Diesel
-                  <span class="float-right text-sm text-danger"><i class="fas fa-star"></i></span>
-                </h3>
-                <p class="text-sm">Call me whenever you can...</p>
-                <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
-              </div>
-            </div>
-            <!-- Message End -->
-          </a>
-          <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item">
-            <!-- Message Start -->
-            <div class="media">
-              <img src="{{ asset('admin')}}/img/user8-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
-              <div class="media-body">
-                <h3 class="dropdown-item-title">
-                  John Pierce
-                  <span class="float-right text-sm text-muted"><i class="fas fa-star"></i></span>
-                </h3>
-                <p class="text-sm">I got your message bro</p>
-                <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
-              </div>
-            </div>
-            <!-- Message End -->
-          </a>
-          <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item">
-            <!-- Message Start -->
-            <div class="media">
-              <img src="{{ asset('admin')}}/img/user3-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
-              <div class="media-body">
-                <h3 class="dropdown-item-title">
-                  Nora Silvester
-                  <span class="float-right text-sm text-warning"><i class="fas fa-star"></i></span>
-                </h3>
-                <p class="text-sm">The subject goes here</p>
-                <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
-              </div>
-            </div>
-            <!-- Message End -->
-          </a>
-          <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item dropdown-footer">See All Messages</a>
-        </div>
-      </li>
-      <!-- Notifications Dropdown Menu -->
-      <li class="nav-item dropdown">
-        <a class="nav-link" data-toggle="dropdown" href="#">
-          <i class="far fa-bell"></i>
-          <span class="badge badge-warning navbar-badge">15</span>
-        </a>
-        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-          <span class="dropdown-header">15 Notifications</span>
-          <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item">
-            <i class="fas fa-envelope mr-2"></i> 4 new messages
-            <span class="float-right text-muted text-sm">3 mins</span>
-          </a>
-          <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item">
-            <i class="fas fa-users mr-2"></i> 8 friend requests
-            <span class="float-right text-muted text-sm">12 hours</span>
-          </a>
-          <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item">
-            <i class="fas fa-file mr-2"></i> 3 new reports
-            <span class="float-right text-muted text-sm">2 days</span>
-          </a>
-          <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
-        </div>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#" role="button"><i
-            class="fas fa-th-large"></i></a>
-      </li>
-    </ul>
   </nav>
   <!-- /.navbar -->
 
@@ -172,41 +79,20 @@
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-          @if(Session::get('page')=="dashboad")
-              @php $active="active" @endphp
-          @else
-              @php $active = "" @endphp
-          @endif
-          <li class="nav-item has-treeview menu-open">
-            <a href="#" class="nav-link {{ $active }}">
+
+          <li class="nav-item ">
+            <a href="{{ route('dashboard') }}" class="nav-link {{ (request()->is('admin/dashboard')) ? 'active': '' }}">
+
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
-                Starter Pages
-                <i class="right fas fa-angle-left"></i>
+                Dashboard
               </p>
             </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="#" class="nav-link active">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Active Page</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Inactive Page</p>
-                </a>
-              </li>
-            </ul>
           </li>
           <li class="nav-item mt-auto ">
-          @if(Session::get('page')=="location")
-              @php $active="active" @endphp
-          @else
-              @php $active = "" @endphp
-          @endif
-            <a href="{{ route('location.index') }}" class="nav-link {{ $active }}">
+
+            <a href="{{ route('location.index') }}" class="nav-link {{ (request()->is('admin/location')) ? 'active': '' }} ">
+
               <i class="nav-icon fas fa-location-arrow"></i>
               <p>
                 Locations 
@@ -214,12 +100,9 @@
             </a>
           </li>
           <li class="nav-item mt-auto ">
-          @if(Session::get('page')=="tag")
-              @php $active="active" @endphp
-          @else
-              @php $active = "" @endphp
-          @endif
-            <a href="{{ route('Tag.index') }}" class="nav-link {{ $active }}">
+
+            <a href="{{ route('Tag.index') }}" class="nav-link {{ (request()->is('admin/Tag')) ? 'active': '' }}">
+
               <i class="nav-icon fas fa-tag"></i>
               <p>
                 Tags
@@ -227,15 +110,19 @@
             </a>
           </li>
           <li class="nav-item mt-auto ">
-          @if(Session::get('page')=="post")
-              @php $active="active" @endphp
-          @else
-              @php $active = "" @endphp
-          @endif
-            <a href="{{ route('post.index') }}" class="nav-link {{ $active }}">
+
+            <a href="{{ route('post.index') }}" class="nav-link {{ (request()->is('admin/post')) ? 'active': '' }}">
               <i class="nav-icon fas fa-pen-nib"></i>
               <p>
                 Posts
+              </p>
+            </a>
+          </li>
+          <li class="text-center mt-5">
+            <a href="{{ route('website') }}" class="btn btn-primary text-white" target="_blank"> 
+              <p class="mb-0">
+                View Website
+
               </p>
             </a>
           </li>
