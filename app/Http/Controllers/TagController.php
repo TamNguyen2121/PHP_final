@@ -14,6 +14,7 @@ class TagController extends Controller
      */
     public function index()
     {
+        Session::put('page','tag');
         $Tag = tag::orderBy('created_at','ASC')->paginate(20);
     return view('admin.Tag.index', compact('Tag'));
     }
