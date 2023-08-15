@@ -66,6 +66,7 @@
               </div>
             </div>
             </form>
+            @include('includes.errors')
             <br>
 
           </div>

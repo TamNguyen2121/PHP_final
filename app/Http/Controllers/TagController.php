@@ -25,7 +25,8 @@ class TagController extends Controller
             });
         }
     
-        $Tag = $tagQuery->paginate(20);    return view('admin.Tag.index', compact('Tag'));
+        $Tag = $tagQuery->paginate(20);    
+        return view('admin.Tag.index', compact('Tag'));
     }
 
     /**

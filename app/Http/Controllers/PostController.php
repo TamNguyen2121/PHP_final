@@ -18,15 +18,21 @@ class PostController extends Controller
      */
     public function index()
     {
-        $postKey = request()->input('post_key');
-        $postQuery = Post::orderBy('created_at', 'ASC');
-    
+        $postKey = request()->input('postKey');
+        $postQuery = Post::orderBy('created_at', 'ASC')
+        ->select('posts.*', 'locations.name as location_name', 'accounts.username as author')
+        ->leftJoin('locations', 'posts.location_id', '=', 'locations.id')
+        ->leftJoin('accounts', 'posts.account_id', '=', 'accounts.id')
+        ->leftJoin('post_tag', 'posts.id', '=', 'post_tag.post_id')
+        ->leftJoin('tags', 'post_tag.tag_id', '=', 'tags.id');
+
         if ($postKey) {
             $postQuery->where(function ($subQuery) use ($postKey) {
-                $subQuery->where('id', '=', $postKey)
-                         ->orWhere('title', 'like', '%' . $postKey . '%')
-                         ->orWhere('location', 'like', '%' . $postKey . '%')
-                         ->orWhere('author', 'like', '%' . $postKey . '%');
+                $subQuery->where('posts.id', '=', $postKey)
+                         ->orWhere('posts.title', 'like', '%' . $postKey . '%')
+                         ->orWhere('locations.name', 'like', '%' . $postKey . '%')
+                         ->orWhere('accounts.username', 'like', '%' . $postKey . '%')
+                         ->orWhere('tags.name', 'like', '%' . $postKey . '%');
             });
         }
     

@@ -73,14 +73,13 @@ Route::group(['prefix' => 'admin'],function()
     Route::get('/contact/show/{id}', [ContactController::class, 'show'])->name('contact.show');
     Route::delete('/contact/delete/{id}', [ContactController::class, 'destroy'])->name('contact.destroy');
 
-    Route::get('/search', [FrontendController::class, 'search'])->name('search.result');
-
 } 
 );
 
 
     Route::get('/search', function()
-{
-    return view('website.search');
-});
+    {
+        return view('website.search');
+    });
+    Route::get('/search', [FrontendController::class, 'search'])->name('search.result');
 

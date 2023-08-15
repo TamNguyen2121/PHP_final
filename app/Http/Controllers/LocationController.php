@@ -13,7 +13,6 @@ class LocationController extends Controller
      */
     public function index()
     {
-        // $location=location::orderBy('created_at','ASC')->paginate(20);
         $locationKey = request()->input('locationKey');
         $locationQuery = Location::orderBy('created_at', 'ASC');
     
@@ -22,7 +21,6 @@ class LocationController extends Controller
                 $subQuery->where('id', '=', $locationKey)
                          ->orWhere('name', 'like', '%' . $locationKey . '%')
                          ->orWhere('address', 'like', '%' . $locationKey . '%');
-                        //  ->orWhere('postcount', 'like', '%' . $locationKey . '%');
             });
         }
     

@@ -36,29 +36,32 @@ class FrontendController extends Controller
 
     public function search()
     {
+        request()->validate([
+            'userSearch' => 'required',
+        ]);
         $userSearch = request()->input('userSearch');
-        $postQuery = Post::orderBy('created_at', 'ASC');
-        $locationQuery = Location::orderBy('created_at', 'ASC');
+        $postQuery = Post::orderBy('created_at', 'ASC')
+        ->select('posts.*', 'locations.name as location_name', 'accounts.username as author')
+        ->leftJoin('locations', 'posts.location_id', '=', 'locations.id')
+        ->leftJoin('accounts', 'posts.account_id', '=', 'accounts.id')
+        ->leftJoin('post_tag', 'posts.id', '=', 'post_tag.post_id')
+        ->leftJoin('tags', 'post_tag.tag_id', '=', 'tags.id');
+
     
-        if ($userSearch) { // Thay $postKey thành $userSearch
+        if ($userSearch) { 
             $postQuery->where(function ($subQuery) use ($userSearch) {
-                $subQuery->where('id', '=', $userSearch)
-                         ->orWhere('title', 'like', '%' . $userSearch . '%');
-                        //  ->orWhere('location', 'like', '%' . $userSearch . '%')
-                        //  ->orWhere('author', 'like', '%' . $userSearch . '%');
+                $subQuery->where('posts.id', '=', $userSearch)
+                         ->orWhere('posts.title', 'like', '%' . $userSearch . '%')
+                         ->orWhere('locations.name', 'like', '%' . $userSearch . '%')
+                         ->orWhere('accounts.username', 'like', '%' . $userSearch . '%')
+                         ->orWhere('tags.name', 'like', '%' . $userSearch . '%');
             });
 
-            $locationQuery->where(function ($subQuery) use ($userSearch) {
-                $subQuery->where('id', '=', $userSearch)
-                         ->orWhere('name', 'like', '%' . $userSearch . '%')
-                         ->orWhere('address', 'like', '%' . $userSearch . '%');
-            });
         }
     
         $post = $postQuery->paginate(20);
-        $location = $locationQuery->paginate(20);
         
-        return view('website.search', compact('post', 'location'));
+        return view('website.search', compact('post'));
 
     }
 }
