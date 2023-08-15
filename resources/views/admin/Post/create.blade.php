@@ -42,10 +42,10 @@
                   <label for="name">Post title</label>
                   <input type="title" name="title" value="{{ old('title') }}" class="form-control" id="title" placeholder="Enter title" fdprocessedid="qqjxn7">
                   </div>
-                  <div class="form-group">
+                  {{-- <div class="form-group">
                     <label for="account_id">Post Account_id</label>
                     <input type="account_id" name="account_id" class="form-control" id="title" placeholder="Enter account_id" fdprocessedid="qqjxn7">
-                    </div>
+                    </div> --}}
                   <div class="form-group">
                   <label for="location">Post Location</label>
                   <select name="location" id="location" class="form-control" >
