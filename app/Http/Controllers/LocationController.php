@@ -13,6 +13,7 @@ class LocationController extends Controller
      */
     public function index()
     {
+
         $locations=location::orderBy('created_at','ASC')->paginate(20);
         foreach($locations as $value){
             // dd($value->posts->count());
@@ -20,6 +21,7 @@ class LocationController extends Controller
         }
         // dd($location);
         return view('admin.Location.index', compact('locations'));
+
 
     }
 

@@ -62,7 +62,9 @@
                   
                 </td>
                 <td>{{ $post->account->username }}</td>
+
                 <td>{{ $post->created_at->format('d M,Y') }}</td>
+
                 <td class="d-flex">
                   <a href="{{ route('post.show', [$post->id]) }}" class="btn btn-sm btn-success mr-1"> <i class="fas fa-eye"></i> </a>
                   <a href="{{ route('post.edit', [$post->id]) }}" class="btn btn-sm btn-primary mr-1"><i class="fas fa-edit"></i></a>

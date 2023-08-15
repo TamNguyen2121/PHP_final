@@ -18,8 +18,10 @@ class PostController extends Controller
      */
     public function index()
     {
+
         $posts = post::orderBy('created_at', 'ASC')->paginate(7);
         return view('admin.post.index', compact('posts'));
+
     }
 
     /**
@@ -156,6 +158,7 @@ class PostController extends Controller
         return redirect()->back();
     }
 
+
     // public function countPostsByAddress($LocationId)
     // {
     //     $locations = Location::all(); 
@@ -167,4 +170,5 @@ class PostController extends Controller
     //     }
     //     return $postCounts;
     // }
+
 }

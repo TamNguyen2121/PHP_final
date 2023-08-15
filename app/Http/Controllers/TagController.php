@@ -14,8 +14,10 @@ class TagController extends Controller
      */
     public function index()
     {
+
         $Tags = tag::orderBy('created_at','ASC')->paginate(20);
     return view('admin.Tag.index', compact('Tags'));
+
     }
 
     /**

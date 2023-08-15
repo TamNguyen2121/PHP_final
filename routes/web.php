@@ -1,6 +1,10 @@
 <?php
 
+
 use App\Http\Controllers\FrontendController;
+
+use App\Http\Controllers\AccountController;
+
 use App\Http\Controllers\LocationController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\TagController;
@@ -45,14 +49,30 @@ Route::get('/post/{id}',[FrontendController::class, 'post'])->name('website.post
 Route::post('/contact', [FrontendController::class, 'send_message'])->name('website.contact');
 
 
-// Admin panel:
-Route::group(['prefix' => 'admin'],function()
-{
-    Route::get('/dashboard', 'App\Http\Controllers\DashboardController@index')->name('dashboard');
-    Route::resource('location', LocationController::class);
-    // route::resource('location','LocationController');
-    Route::resource('Tag',TagController::class);
-    Route::resource('post',PostController::class );
+
+Route::prefix('/admin')->namespace('App\Http\Controllers')->group(function(){
+    
+    Route::match(['get','post'],'login','AccountController@login');
+    Route::group(['middleware'=>['account']], function(){
+        Route::get('dashboard', 'DashboardController@index')->name('dashboard');
+        Route::match(['get','post'],'profile','AccountController@profile');
+        Route::get('logout','AccountController@logout');
+        Route::resource('location', LocationController::class);
+        Route::resource('Tag',TagController::class);
+        Route::resource('post',PostController::class );
+        
+    });
+        
+});
+    
+
+
+
+
+
+
+
+
 
     
 }

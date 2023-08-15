@@ -28,7 +28,7 @@
         <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
-        <a href="index3.html" class="nav-link">Home</a>
+        <a href="{{ url('admin/dashboard') }}" class="nav-link active">Home</a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
         <a href="#" class="nav-link">Contact</a>
@@ -63,10 +63,14 @@
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
+        @if(!empty(Auth::guard('admin')->user()->image))
+          <img src="{{ asset('admin/img/photos/'.Auth::guard('admin')->user()->image)}}" class="img-circle elevation-2" alt="User Image">
+        @else
           <img src="{{ asset('admin')}}/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+        @endif
         </div>
         <div class="info">
-          <a href="#" class="d-block">Alexander Pierce</a>
+          <a href="#" class="d-block">{{ Auth::guard('admin')->user()->username }}</a>
         </div>
       </div>
 
@@ -75,8 +79,10 @@
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
+
           <li class="nav-item ">
             <a href="{{ route('dashboard') }}" class="nav-link {{ (request()->is('admin/dashboard')) ? 'active': '' }}">
+
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
                 Dashboard
@@ -84,7 +90,9 @@
             </a>
           </li>
           <li class="nav-item mt-auto ">
+
             <a href="{{ route('location.index') }}" class="nav-link {{ (request()->is('admin/location')) ? 'active': '' }} ">
+
               <i class="nav-icon fas fa-location-arrow"></i>
               <p>
                 Locations 
@@ -92,7 +100,9 @@
             </a>
           </li>
           <li class="nav-item mt-auto ">
+
             <a href="{{ route('Tag.index') }}" class="nav-link {{ (request()->is('admin/Tag')) ? 'active': '' }}">
+
               <i class="nav-icon fas fa-tag"></i>
               <p>
                 Tags
@@ -100,6 +110,7 @@
             </a>
           </li>
           <li class="nav-item mt-auto ">
+
             <a href="{{ route('post.index') }}" class="nav-link {{ (request()->is('admin/post')) ? 'active': '' }}">
               <i class="nav-icon fas fa-pen-nib"></i>
               <p>
@@ -111,16 +122,51 @@
             <a href="{{ route('website') }}" class="btn btn-primary text-white" target="_blank"> 
               <p class="mb-0">
                 View Website
+
               </p>
             </a>
           </li>
-            {{-- <li class="nav-item mt-auto bg-danger">
-              <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit()" class="nav-link">
+
+          <li class="nav-item mt-auto ">
+            <a href="#" class="nav-link">
+            <i class="nav-icon fas fa-solid fa-users"></i>
+              <p>
+                Users
+              </p>
+            </a>
+          </li>
+
+          <li class="nav-item mt-auto ">
+            <a href="#" class="nav-link">
+            <i class="nav-icon fas fa-solid fa-users"></i>
+              <p>
+                New Account
+              </p>
+            </a>
+          </li>
+
+          <li class="nav-item mt-auto">
+          @if(Session::get('page')=="profile")
+              @php $active="active" @endphp
+          @else
+              @php $active = "" @endphp
+          @endif
+            <a href="{{ url('admin/profile') }}" class="nav-link {{ $active }}">
+            <i class="nav-icon fas fa-regular fa-address-book"></i>
+              <p>
+                Profile
+              </p>
+            </a>
+          </li>
+
+          <li class="nav-item mt-auto bg-danger mt-3">
+              <a href="{{ url('admin/logout') }}" class="nav-link">
                 <i class="nav-icon fas fas fa-sign-out-alt"></i>
                 <p>
                   Logout
                 </p>
-          </li> --}}
+              </a>
+          </li>
         </ul>
       </nav>
       <!-- /.sidebar-menu -->
