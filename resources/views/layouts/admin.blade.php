@@ -118,14 +118,7 @@
               </p>
             </a>
           </li>
-          <li class="text-center mt-5">
-            <a href="{{ route('website') }}" class="btn btn-primary text-white" target="_blank"> 
-              <p class="mb-0">
-                View Website
-
-              </p>
-            </a>
-          </li>
+         
 
           <li class="nav-item mt-auto ">
             <a href="#" class="nav-link">
@@ -159,10 +152,19 @@
             </a>
           </li>
 
-          <li class="nav-item mt-auto bg-danger mt-3">
-              <a href="{{ url('admin/logout') }}" class="nav-link">
+          <li class="text-center mt-5">
+            <a href="{{ route('website') }}" class="btn btn-primary text-white" target="_blank"> 
+              <p class="mb-0">
+                View Website
+
+              </p>
+            </a>
+          </li>
+
+          <li class="nav-link mt-2">
+              <a href="{{ url('admin/logout') }}" class="btn btn-primary text-white  bg-danger ml-5" target="_blank">
                 <i class="nav-icon fas fas fa-sign-out-alt"></i>
-                <p>
+                <p class="mb-0 mr-2">
                   Logout
                 </p>
               </a>

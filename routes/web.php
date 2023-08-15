@@ -75,8 +75,7 @@ Route::prefix('/admin')->namespace('App\Http\Controllers')->group(function(){
 
 
     
-}
-);
+
 
 // Route::get('/test',function()){
 //     $posts= App\post::all();
