@@ -1,13 +1,12 @@
 <?php
 
+use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\LocationController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\TagController;
 use App\Models\location;
 use App\Models\Tag;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\FrontendController;
-use App\Models\Contact;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,53 +18,53 @@ use App\Models\Contact;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+// Auth::routes();
+Route::get('/home','HomeController@index')->name('home');
+// Route::get('/','FrontendController@home')->name('website');
 
-Route::get('/', function () {
-    return view('home');
-});
+// Route::get('/', function () {
+//     return view('home');
+// });
+Route::get('/home', [FrontendController::class, 'home'])->name('website.home');
+Route::get('/', [FrontendController::class, 'home'])->name('website');
 
-Route::get('/about', function()
-{
-    return view('website.about');
-});
+Route::get('/all_post', [FrontendController::class, 'all_post'])->name('website.all_post');
 
-Route::get('/category', function()
-{
-    return view('website.category');
-});
-Route::get('/contact', function()
-{
-    return view('website.contact');
-});
-Route::get('/home', function()
-{
-    return view('website.home');
-})->name('website');
-Route::get('/post', function()
-{
-    return view('website.post');
-});
+Route::get('/contact',[FrontendController::class, 'contact'])->name('website.contact');
 
-Route::get('/test', function()
-{
-    return view('layouts.admin');
-});
+Route::get('/about',[FrontendController::class, 'about'])->name('website.about');
+
+Route::get('/post/{id}',[FrontendController::class, 'post'])->name('website.post');
+
+// Route::get('/test', function()
+// {
+//     return view('layouts.admin');
+// });
 
 // Route::post('/contact', 'FrontendController@send_message') ->name('website.contact');
 Route::post('/contact', [FrontendController::class, 'send_message'])->name('website.contact');
 
+
 // Admin panel:
-// Route::group(['prefix' => 'admin'],function()
-// {
-//     Route::get('/dashboard', function()
-//     {
-//         return view('admin.dashboard.index');
-//     });
-//     Route::resource('location', LocationController::class);
-//     // route::resource('location','LocationController');
-//     Route::resource('Tag',TagController::class);
-//     Route::resource('post',PostController::class );
+Route::group(['prefix' => 'admin'],function()
+{
+    Route::get('/dashboard', 'App\Http\Controllers\DashboardController@index')->name('dashboard');
+    Route::resource('location', LocationController::class);
+    // route::resource('location','LocationController');
+    Route::resource('Tag',TagController::class);
+    Route::resource('post',PostController::class );
 
     
-// } 
-// );
+}
+);
+
+// Route::get('/test',function()){
+//     $posts= App\post::all();
+
+//     $id =99;
+//     foreach($posts as $post){
+//         $post->image =""
+//         $id++;
+//     }
+//     return $posts
+// }

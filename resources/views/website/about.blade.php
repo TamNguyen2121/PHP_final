@@ -13,19 +13,19 @@
         </div>
     </div>
 
-    <div class="site-section bg-light">
+    {{-- <div class="site-section bg-light">
         <div class="container">
         <div class="row">
             <div class="col-md-6 order-md-2">
-            <img src="@if($user->image) {{ $user->image }} @else {{ asset('website/images/user.png') }} @endif" alt="Image" class="img-fluid">
+            <img src="@if($account->image) {{ $account->image }} @else {{ asset('website/images/user.png') }} @endif" alt="Image" class="img-fluid">
             </div>
             <div class="col-md-5 mr-auto order-md-1">
-                <h2> {{ $user->name }}</h2>
+                <h2> {{ $account->name }}</h2>
                 <p>{{ $user->description }}</p>
             </div>
         </div>
         </div>
-    </div>
+    </div> --}}
 
     <div class="site-section bg-white">
         <div class="container">

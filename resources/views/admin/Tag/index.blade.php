@@ -1,20 +1,20 @@
 @extends('layouts.admin')
 @section('content')
 <div class="content-header">
-    <div class="container-fluid">
-      <div class="row mb-2">
-        <div class="col-sm-6">
-          <h1 class="m-0 text-dark">Tags</h1>
-        </div><!-- /.col -->
-        <div class="col-sm-6">
-          <ol class="breadcrumb float-sm-right">
-            <li class="breadcrumb-item"><a href="{{ route('website') }}">Home</a></li>
-            <li class="breadcrumb-item active">Tags list</li>
-          </ol>
-        </div><!-- /.col -->
-      </div><!-- /.row -->
-    </div><!-- /.container-fluid -->
-  </div>
+  <div class="container-fluid">
+    <div class="row mb-2">
+      <div class="col-sm-6">
+        <h1 class="m-0 text-dark">Tags</h1>
+      </div><!-- /.col -->
+      <div class="col-sm-6">
+        <ol class="breadcrumb float-sm-right">
+          <li class="breadcrumb-item"><a href="{{ route('website') }}">Home</a></li>
+          <li class="breadcrumb-item active">Tags list</li>
+        </ol>
+      </div><!-- /.col -->
+    </div><!-- /.row -->
+  </div><!-- /.container-fluid -->
+</div>
   <!-- /.content-header -->
    <!-- Main content -->
    <div class="content">
@@ -41,8 +41,8 @@
                 </tr>
                 </thead>
                 <tbody>
-                  @if($Tag->count())
-                @foreach($Tag as $Tag)
+                  @if($Tags->count())
+                @foreach($Tags as $Tag)
                 <tr>
                 <td>{{ $Tag->id }}</td>
                 <td>{{ $Tag->name }}</td>
@@ -76,5 +76,25 @@
       </div>
     </div>
    </div>
-
+   <div class="card-footer">
+    <div class="row text-center pt-5 border-top">
+      <div class="col-md-12">
+        <ul class="pagination pagination-sm m-0 float-right">
+        
+          @if($Tags->currentPage() > 1)
+          <li class="page-item"><a class="page-link"  href="{{ $Tags->previousPageUrl() }}"><</a></li>
+          @endif
+  
+          @for($i = 1; $i <= $Tags->lastPage(); $i++)
+          <li class="page-item"><a class="page-link"  href="{{ $Tags->url($i) }}">{{ $i }}</a></li>
+          @endfor
+  
+          @if($Tags->currentPage() < $Tags->lastPage())
+          <li class="page-item"><a class="page-link"   href="{{ $Tags->nextPageUrl() }}">></a></li>
+          @endif
+        </ul>
+       
+      </div>
+    </div>
+   </div>
 @endsection

@@ -18,8 +18,8 @@ class PostController extends Controller
      */
     public function index()
     {
-        $post = post::orderBy('created_at', 'ASC')->paginate(20);
-        return view('admin.post.index', compact('post'));
+        $posts = post::orderBy('created_at', 'ASC')->paginate(7);
+        return view('admin.post.index', compact('posts'));
     }
 
     /**
@@ -155,4 +155,16 @@ class PostController extends Controller
 
         return redirect()->back();
     }
+
+    // public function countPostsByAddress($LocationId)
+    // {
+    //     $locations = Location::all(); 
+
+    //     $postCounts = []; 
+    
+    //     foreach ($locations as $location) {
+    //         $postCounts[$location->id] = $this->countPostsByAddress($location->id);
+    //     }
+    //     return $postCounts;
+    // }
 }

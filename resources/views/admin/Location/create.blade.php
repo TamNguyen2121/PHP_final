@@ -48,7 +48,7 @@
                   </div>
                   </div>
               
-                  <div class="form-group">
+                  <div class="card-footer">
                   <button type="submit" class="btn btn-lg btn-primary" fdprocessedid="xtpjg">Submit</button>
                   </div>
                   </form>
