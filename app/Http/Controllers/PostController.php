@@ -44,12 +44,12 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request->all());
+        // dd();
         $this->validate($request, [
             'title' => 'required',
             'image' => 'required|image',
             'content' => 'required',
-            'account_id'=>'required',
+            // 'account_id'=>'required',
             'location' => 'required',
         ]);
 
@@ -57,7 +57,7 @@ class PostController extends Controller
             'title' => $request->title,
             'image' => 'image.jpg',
             'content' => $request->content,
-            'account_id' => auth()->user()->id,
+            'account_id' => auth()->guard('admin')->user()->id,
             'location_id' => $request->location,
             'published_at' => Carbon::now(),
         ]);

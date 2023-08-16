@@ -62,7 +62,7 @@
 
             <h2 class="text-limit" ><a href="single.html">{{ $post->title }}</a></h2>
             <div class="post-meta align-items-center text-left clearfix">
-              <figure class="author-figure mb-0 mr-3 float-left"><img src ="{{ $post->account->image }} "alt="Image"  width="350" height="200"></figure>
+              <figure class="author-figure mb-0 mr-3 float-left"><img src ="{{ asset('admin/img/photos/'.$post->account->image) }}" class="img-circle" style="width:35px; height:35px"; ></figure>
               <span class="d-inline-block mt-1">By <a href="#">{{ $post->account->username }}</a></span>
               <span>&nbsp;-&nbsp; {{ $post->created_at->format('M d, Y') }}</span>
             </div>

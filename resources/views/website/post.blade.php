@@ -11,7 +11,7 @@
               <span class="post-category text-white bg-success mb-3">{{  $post->location->name }}</span>
               <h1 class="mb-4"><a href="#">{{ $post->title }}</a></h1>
               <div class="post-meta align-items-center text-center">
-                <figure class="author-figure mb-0 mr-3 d-inline-block"><img src="{{ $post->account->image }}" alt="Image" class="img-fluid"></figure>
+                <figure class="author-figure mb-0 mr-3 d-inline-block"><img src ="{{ asset('admin/img/photos/'.$post->account->image) }}" class="img-circle" style="width:35px; height:35px"; ></figure>
                 <span class="d-inline-block mt-1">{{ $post->account->username }}</span>
                 <span>&nbsp;-&nbsp; {{ $post->created_at->format('M d,Y') }}</span>
               </div>
@@ -43,7 +43,7 @@
                 </p>
             </div>
       
-            {{-- <div class="pt-5">
+            <div class="pt-5">
               <h3 class="mb-5">6 Comments</h3>
               <ul class="comment-list">
                 <li class="comment">
@@ -153,7 +153,7 @@
 
                 </form>
               </div>
-            </div> --}}
+            </div>
 
           </div>
 
@@ -171,7 +171,7 @@
             <!-- END sidebar-box -->
             <div class="sidebar-box">
               <div class="bio text-center">
-                <img src="{{ $post->account->image }}" alt="Image Placeholder" class="img-fluid mb-5">
+                <img src ="{{ asset('admin/img/photos/'.$post->account->image) }}" class="img-circle" style="width:80px; height:80px"; >
                 <div class="bio-body">
                   <h2>{{ $post->account->username }}</h2>
                   {{-- <p class="mb-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Exercitationem facilis sunt repellendus excepturi beatae porro debitis voluptate nulla quo veniam fuga sit molestias minus.</p>
@@ -347,6 +347,7 @@
             </div>
           </div>
         </div>
+        
       
 
       {{-- </div>

@@ -52,9 +52,9 @@
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="index3.html" class="brand-link">
-      <img src="{{ asset('admin')}}/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
-           style="opacity: .8">
+    <a href="index3.html" class="brand-link ml-3">
+      <img src="{{ asset('admin')}}/img/caption.jpg" alt="AdminLTE Logo" class=" rounded-circle "
+      style="width:40px; height:40px";>
       <span class="brand-text font-weight-light">TravelExplorer</span>
     </a>
 
@@ -64,7 +64,7 @@
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
         @if(!empty(Auth::guard('admin')->user()->image))
-          <img src="{{ asset('admin/img/photos/'.Auth::guard('admin')->user()->image)}}" class="img-circle elevation-2" alt="User Image">
+          <img src="{{ asset('admin/img/photos/'.Auth::guard('admin')->user()->image)}}" class="img-circle " style="width:40px; height:40px" alt="User Image">
         @else
           <img src="{{ asset('admin')}}/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
         @endif
