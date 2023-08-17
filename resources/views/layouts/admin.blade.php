@@ -281,8 +281,8 @@
           </li>
 
 
-          <li class="nav-item mt-5 bg-danger">
-              <a href="{{ url('admin/logout') }}" class="nav-link">
+          <li class="text-center mt-3 ml-5 " style="width:140px" >
+              <a href="{{ url('admin/logout') }}" class="btn btn-primary bg-danger nav-link">
                 <i class="nav-icon fas fas fa-sign-out-alt"></i>
                 <p class="mb-0 mr-2">
                   Logout
