@@ -62,10 +62,19 @@ Route::prefix('/admin')->namespace('App\Http\Controllers')->group(function(){
     Route::group(['middleware'=>['account']], function(){
         Route::get('dashboard','AccountController@dashboard');
         Route::match(['get','post'],'profile','AccountController@profile');
-        Route::get('logout','AccountController@logout');
+        Route::match(['get','post'],'edituser','AccountController@edituser');
         Route::resource('location', LocationController::class);
         Route::resource('Tag',TagController::class);
         Route::resource('post',PostController::class );
+        
+        Route::get('logout','AccountController@logout');
+
+        Route::get('user','AccountController@subadmins');
+        Route::post('update-subadmin-status','AccountController@updateSubadminStatus');
+        Route::match(['get','post'],'add-edit-subadmin/{id?}','AccountController@addEditSubadmin');
+        Route::get('delete-subadmin/{id?}','AccountController@deleteSubadmin');
+
+
         
     });
         

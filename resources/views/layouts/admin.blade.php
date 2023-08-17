@@ -5,6 +5,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="csrf-token" content="{{ csrf_token() }}" />
 
   <title>Admin_TravelExplorer</title>
 
@@ -12,6 +13,9 @@
   <link rel="stylesheet" href="{{ asset('admin')}}/plugins/fontawesome-free/css/all.min.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="{{ asset('admin')}}/css/adminlte.min.css">
+  <!-- Select2 -->
+  <link rel="stylesheet" href="{{ asset('admin')}}/plugins/select2/css/select2.min.css">
+  <link rel="stylesheet" href="{{ asset('admin')}}/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
@@ -241,7 +245,12 @@
           </li>
 
           <li class="nav-item mt-auto ">
-            <a href="#" class="nav-link">
+          @if(Session::get('page')=="user")
+              @php $active="active" @endphp
+          @else
+              @php $active = "" @endphp
+          @endif
+            <a href="{{ url('admin/user') }}" class="nav-link {{ $active }}">
             <i class="nav-icon fas fa-solid fa-users"></i>
               <p>
                 Users
@@ -249,14 +258,19 @@
             </a>
           </li>
 
-          <li class="nav-item mt-auto ">
+          <!-- <li class="nav-item mt-auto ">
+          @if(Session::get('page')=="profile")
+              @php $active="active" @endphp
+          @else
+              @php $active = "" @endphp
+          @endif
             <a href="#" class="nav-link">
-            <i class="nav-icon fas fa-solid fa-users"></i>
+            <i class="nav-icon fas fa-solid fa-user-plus"></i>
               <p>
                 New Account
               </p>
             </a>
-          </li>
+          </li> -->
 
           <li class="nav-item mt-auto">
           @if(Session::get('page')=="profile")
@@ -272,7 +286,7 @@
             </a>
           </li>
 
-          <li class="nav-item mt-auto bg-danger mt-3">
+          <li class="nav-item mt-5 bg-danger">
               <a href="{{ url('admin/logout') }}" class="nav-link">
                 <i class="nav-icon fas fas fa-sign-out-alt"></i>
                 <p>
@@ -327,6 +341,24 @@
 <script src="{{ asset('admin')}}/js/adminlte.min.js"></script>
 <script src="{{ asset('admin')}}/js/bs-custom-file-input.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+<!-- Custom JS -->
+<script src="{{ asset('admin')}}/js/custom.js"></script>
+<!-- DataTables  & Plugins -->
+<script src="{{ asset('admin')}}/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="{{ asset('admin')}}/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+<script src="{{ asset('admin')}}/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+<script>
+  $(function () {
+    $("#subadmins").DataTable();
+  })
+</script>
+<!-- Select2 -->
+<script src="{{ asset('admin')}}/plugins/select2/js/select2.full.min.js"></script>
+<script>
+    $('.select2').select2();
+</script>
+<!-- SweetAlert -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 @yield('script')
 <script>
   @if(Session::has('success'))
