@@ -1,20 +1,36 @@
 @extends('layouts.admin')
 @section('content')
 <div class="content-header">
-  <div class="container-fluid">
-    <div class="row mb-2">
-      <div class="col-sm-6">
-        <h1 class="m-0 text-dark">Tags</h1>
-      </div><!-- /.col -->
-      <div class="col-sm-6">
-        <ol class="breadcrumb float-sm-right">
-          <li class="breadcrumb-item"><a href="{{ route('website') }}">Home</a></li>
-          <li class="breadcrumb-item active">Tags list</li>
-        </ol>
-      </div><!-- /.col -->
-    </div><!-- /.row -->
-  </div><!-- /.container-fluid -->
+
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1 class="m-0 text-dark">Tags</h1>
+        </div><!-- /.col -->
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item"><a href="{{ route('website') }}">Home</a></li>
+            <li class="breadcrumb-item active">Tags list</li>
+          </ol>
+        </div><!-- /.col -->
+      </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+  </div>
+
+  <!-- SEARCH FORM -->
+<form class="form-inline ml-3" action="" method="GET">
+<div class="input-group input-group-sm">
+  <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search" name="tagKey">
+  <div class="input-group-append">
+    <button class="btn btn-primary" type="submit">
+      <i class="fas fa-search"></i>
+    </button>
+  </div>
 </div>
+</form>
+<br>
+
+
   <!-- /.content-header -->
    <!-- Main content -->
    <div class="content">

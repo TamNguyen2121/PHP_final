@@ -19,8 +19,26 @@ class PostController extends Controller
     public function index()
     {
 
-        $posts = post::orderBy('created_at', 'ASC')->paginate(7);
-        return view('admin.post.index', compact('posts'));
+        $postKey = request()->input('postKey');
+        $postQuery = Post::orderBy('created_at', 'ASC')
+        ->select('posts.*', 'locations.name as location_name', 'accounts.username as author')
+        ->leftJoin('locations', 'posts.location_id', '=', 'locations.id')
+        ->leftJoin('accounts', 'posts.account_id', '=', 'accounts.id')
+        ->leftJoin('post_tag', 'posts.id', '=', 'post_tag.post_id')
+        ->leftJoin('tags', 'post_tag.tag_id', '=', 'tags.id');
+
+        if ($postKey) {
+            $postQuery->where(function ($subQuery) use ($postKey) {
+                $subQuery->where('posts.id', '=', $postKey)
+                         ->orWhere('posts.title', 'like', '%' . $postKey . '%')
+                         ->orWhere('locations.name', 'like', '%' . $postKey . '%')
+                         ->orWhere('accounts.username', 'like', '%' . $postKey . '%')
+                         ->orWhere('tags.name', 'like', '%' . $postKey . '%');
+            });
+        }
+    
+        $posts = $postQuery->paginate(20);
+        return view('admin.post.index',compact('posts'));
 
     }
 

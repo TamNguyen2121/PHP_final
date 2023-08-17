@@ -12,6 +12,10 @@ use App\Models\location;
 use App\Models\Tag;
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\FrontendController;
+use App\Models\Contact;
+use App\Http\Controllers\ContactController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -50,6 +54,7 @@ Route::post('/contact', [FrontendController::class, 'send_message'])->name('webs
 
 
 
+
 Route::prefix('/admin')->namespace('App\Http\Controllers')->group(function(){
     
     Route::match(['get','post'],'login','AccountController@login');
@@ -60,8 +65,18 @@ Route::prefix('/admin')->namespace('App\Http\Controllers')->group(function(){
         Route::resource('location', LocationController::class);
         Route::resource('Tag',TagController::class);
         Route::resource('post',PostController::class );
-        
+         // Contact
+    // Route::get('/contact','ContactController@index')->name('contact.index');
+    Route::get('/contact', [ContactController::class, 'index'])->name('contact.index');
+    Route::get('/contact/show/{id}', [ContactController::class, 'show'])->name('contact.show');
+    Route::delete('/contact/delete/{id}', [ContactController::class, 'destroy'])->name('contact.destroy');
+
     });
+   Route::get('/search', function()
+    {
+        return view('website.search');
+    });
+    Route::get('/search', [FrontendController::class, 'search'])->name('search.result');
         
 });
     
@@ -77,13 +92,4 @@ Route::prefix('/admin')->namespace('App\Http\Controllers')->group(function(){
     
 
 
-// Route::get('/test',function()){
-//     $posts= App\post::all();
 
-//     $id =99;
-//     foreach($posts as $post){
-//         $post->image =""
-//         $id++;
-//     }
-//     return $posts
-// }
