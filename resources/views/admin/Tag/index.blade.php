@@ -1,6 +1,7 @@
 @extends('layouts.admin')
 @section('content')
 <div class="content-header">
+
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-6">
@@ -15,6 +16,21 @@
       </div><!-- /.row -->
     </div><!-- /.container-fluid -->
   </div>
+
+  <!-- SEARCH FORM -->
+<form class="form-inline ml-3" action="" method="GET">
+<div class="input-group input-group-sm">
+  <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search" name="tagKey">
+  <div class="input-group-append">
+    <button class="btn btn-primary" type="submit">
+      <i class="fas fa-search"></i>
+    </button>
+  </div>
+</div>
+</form>
+<br>
+
+
   <!-- /.content-header -->
    <!-- Main content -->
    <div class="content">
@@ -41,8 +57,8 @@
                 </tr>
                 </thead>
                 <tbody>
-                  @if($Tag->count())
-                @foreach($Tag as $Tag)
+                  @if($Tags->count())
+                @foreach($Tags as $Tag)
                 <tr>
                 <td>{{ $Tag->id }}</td>
                 <td>{{ $Tag->name }}</td>
@@ -76,5 +92,25 @@
       </div>
     </div>
    </div>
-
+   <div class="card-footer">
+    <div class="row text-center pt-5 border-top">
+      <div class="col-md-12">
+        <ul class="pagination pagination-sm m-0 float-right">
+        
+          @if($Tags->currentPage() > 1)
+          <li class="page-item"><a class="page-link"  href="{{ $Tags->previousPageUrl() }}"><</a></li>
+          @endif
+  
+          @for($i = 1; $i <= $Tags->lastPage(); $i++)
+          <li class="page-item"><a class="page-link"  href="{{ $Tags->url($i) }}">{{ $i }}</a></li>
+          @endfor
+  
+          @if($Tags->currentPage() < $Tags->lastPage())
+          <li class="page-item"><a class="page-link"   href="{{ $Tags->nextPageUrl() }}">></a></li>
+          @endif
+        </ul>
+       
+      </div>
+    </div>
+   </div>
 @endsection

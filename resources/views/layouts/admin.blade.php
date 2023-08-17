@@ -40,16 +40,17 @@
     </ul>
 
     <!-- SEARCH FORM -->
-    <form class="form-inline ml-3">
+    <!-- <form class="form-inline ml-3" action="" method="GET">
       <div class="input-group input-group-sm">
-        <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
+        <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search" name="query">
         <div class="input-group-append">
           <button class="btn btn-navbar" type="submit">
             <i class="fas fa-search"></i>
           </button>
         </div>
       </div>
-    </form>
+
+    </form> -->
 
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
@@ -143,15 +144,16 @@
             class="fas fa-th-large"></i></a>
       </li>
     </ul>
+
   </nav>
   <!-- /.navbar -->
 
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="index3.html" class="brand-link">
-      <img src="{{ asset('admin')}}/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
-           style="opacity: .8">
+    <a href="index3.html" class="brand-link ml-3">
+      <img src="{{ asset('admin')}}/img/caption.jpg" alt="AdminLTE Logo" class=" rounded-circle "
+      style="width:40px; height:40px";>
       <span class="brand-text font-weight-light">TravelExplorer</span>
     </a>
 
@@ -161,7 +163,7 @@
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
         @if(!empty(Auth::guard('admin')->user()->image))
-          <img src="{{ asset('admin/img/photos/'.Auth::guard('admin')->user()->image)}}" class="img-circle elevation-2" alt="User Image">
+          <img src="{{ asset('admin/img/photos/'.Auth::guard('admin')->user()->image)}}" class="img-circle " style="width:40px; height:40px" alt="User Image">
         @else
           <img src="{{ asset('admin')}}/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
         @endif
@@ -176,41 +178,20 @@
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-          @if(Session::get('page')=="dashboad")
-              @php $active="active" @endphp
-          @else
-              @php $active = "" @endphp
-          @endif
-          <li class="nav-item has-treeview menu-open">
-            <a href="#" class="nav-link {{ $active }}">
+
+          <li class="nav-item ">
+            <a href="{{ route('dashboard') }}" class="nav-link {{ (request()->is('admin/dashboard')) ? 'active': '' }}">
+
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
-                Starter Pages
-                <i class="right fas fa-angle-left"></i>
+                Dashboard
               </p>
             </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="#" class="nav-link active">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Active Page</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Inactive Page</p>
-                </a>
-              </li>
-            </ul>
           </li>
           <li class="nav-item mt-auto ">
-          @if(Session::get('page')=="location")
-              @php $active="active" @endphp
-          @else
-              @php $active = "" @endphp
-          @endif
-            <a href="{{ route('location.index') }}" class="nav-link {{ $active }}">
+
+            <a href="{{ route('location.index') }}" class="nav-link {{ (request()->is('admin/location')) ? 'active': '' }} ">
+
               <i class="nav-icon fas fa-location-arrow"></i>
               <p>
                 Locations 
@@ -218,12 +199,9 @@
             </a>
           </li>
           <li class="nav-item mt-auto ">
-          @if(Session::get('page')=="tag")
-              @php $active="active" @endphp
-          @else
-              @php $active = "" @endphp
-          @endif
-            <a href="{{ route('Tag.index') }}" class="nav-link {{ $active }}">
+
+            <a href="{{ route('Tag.index') }}" class="nav-link {{ (request()->is('admin/Tag')) ? 'active': '' }}">
+
               <i class="nav-icon fas fa-tag"></i>
               <p>
                 Tags
@@ -231,12 +209,8 @@
             </a>
           </li>
           <li class="nav-item mt-auto ">
-          @if(Session::get('page')=="post")
-              @php $active="active" @endphp
-          @else
-              @php $active = "" @endphp
-          @endif
-            <a href="{{ route('post.index') }}" class="nav-link {{ $active }}">
+
+            <a href="{{ route('post.index') }}" class="nav-link {{ (request()->is('admin/post')) ? 'active': '' }}">
               <i class="nav-icon fas fa-pen-nib"></i>
               <p>
                 Posts
@@ -244,8 +218,19 @@
             </a>
           </li>
 
-          <li class="nav-item mt-auto ">
-          @if(Session::get('page')=="user")
+        
+         <li class="nav-item mt-auto ">
+            <a href="{{ route('contact.index') }}" class="nav-link">
+              <i class="nav-icon fas fa-envelope"></i>
+              <p>
+                Message
+               </p>
+            </a>
+          </li>
+
+  
+     <li class="nav-item mt-auto ">
+        @if(Session::get('page')=="user")
               @php $active="active" @endphp
           @else
               @php $active = "" @endphp
@@ -285,11 +270,21 @@
               </p>
             </a>
           </li>
+          
+          
+           <li class="text-center mt-5">
+            <a href="{{ route('website') }}" class="btn btn-primary text-white" target="_blank"> 
+              <p class="mb-0">
+                View Website
+              </p>
+            </a>
+          </li>
+
 
           <li class="nav-item mt-5 bg-danger">
               <a href="{{ url('admin/logout') }}" class="nav-link">
                 <i class="nav-icon fas fas fa-sign-out-alt"></i>
-                <p>
+                <p class="mb-0 mr-2">
                   Logout
                 </p>
               </a>
@@ -371,3 +366,4 @@
 </script>
 </body>
 </html>
+

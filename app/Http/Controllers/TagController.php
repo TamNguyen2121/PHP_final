@@ -14,9 +14,21 @@ class TagController extends Controller
      */
     public function index()
     {
-        Session::put('page','tag');
-        $Tag = tag::orderBy('created_at','ASC')->paginate(20);
-    return view('admin.Tag.index', compact('Tag'));
+
+        $tagKey = request()->input('tagKey');
+        $tagQuery = Tag::orderBy('created_at', 'ASC');
+    
+        if ($tagKey) {
+            $tagQuery->where(function ($subQuery) use ($tagKey) {
+                $subQuery->where('id', '=', $tagKey)
+                         ->orWhere('name', 'like', '%' . $tagKey . '%')
+                         ->orWhere('description', 'like', '%' . $tagKey . '%');
+            });
+        }
+    
+        $Tags = $tagQuery->paginate(20);    
+        return view('admin.Tag.index', compact('Tags'));
+      
     }
 
     /**

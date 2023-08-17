@@ -1,21 +1,21 @@
 @extends('layouts.admin')
 @section('content')
 <div class="content-header">
-    <div class="container-fluid">
-      <div class="row mb-2">
-        <div class="col-sm-6">
-          <h1 class="m-0 text-dark">Create Post</h1>
-        </div><!-- /.col -->
-        <div class="col-sm-6">
-          <ol class="breadcrumb float-sm-right">
-            <li class="breadcrumb-item"><a href="{{ route('website') }}">Home</a></li>
-            <li class="breadcrumb-item "><a href="{{ route('post.index') }}">Post List</a></li>
-            <li class="breadcrumb-item active">Create Posts</li>
-          </ol>
-        </div><!-- /.col -->
-      </div><!-- /.row -->
-    </div><!-- /.container-fluid -->
-  </div>
+  <div class="container-fluid">
+    <div class="row mb-2">
+      <div class="col-sm-6">
+        <h1 class="m-0 text-dark">Create Post</h1>
+      </div><!-- /.col -->
+      <div class="col-sm-6">
+        <ol class="breadcrumb float-sm-right">
+          <li class="breadcrumb-item"><a href="{{ route('website') }}">Home</a></li>
+          <li class="breadcrumb-item "><a href="{{ route('post.index') }}">Post List</a></li>
+          <li class="breadcrumb-item active">Create Posts</li>
+        </ol>
+      </div><!-- /.col -->
+    </div><!-- /.row -->
+  </div><!-- /.container-fluid -->
+</div>
   <!-- /.content-header -->
    <!-- Main content -->
    <div class="content">
@@ -42,10 +42,10 @@
                   <label for="name">Post title</label>
                   <input type="title" name="title" value="{{ old('title') }}" class="form-control" id="title" placeholder="Enter title" fdprocessedid="qqjxn7">
                   </div>
-                  <div class="form-group">
+                  {{-- <div class="form-group">
                     <label for="account_id">Post Account_id</label>
                     <input type="account_id" name="account_id" class="form-control" id="title" placeholder="Enter account_id" fdprocessedid="qqjxn7">
-                    </div>
+                    </div> --}}
                   <div class="form-group">
                   <label for="location">Post Location</label>
                   <select name="location" id="location" class="form-control" >

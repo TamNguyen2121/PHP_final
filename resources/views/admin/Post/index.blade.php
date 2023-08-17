@@ -1,6 +1,7 @@
 @extends('layouts.admin')
 @section('content')
 <div class="content-header">
+
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-6">
@@ -15,6 +16,21 @@
       </div><!-- /.row -->
     </div><!-- /.container-fluid -->
   </div>
+
+  <!-- SEARCH FORM -->
+<form class="form-inline ml-3" action="" method="GET">
+<div class="input-group input-group-sm">
+  <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search" name="postKey">
+  <div class="input-group-append">
+    <button class="btn btn-primary" type="submit">
+      <i class="fas fa-search"></i>
+    </button>
+  </div>
+</div>
+</form>
+<br>
+
+
   <!-- /.content-header -->
    <!-- Main content -->
    <div class="content">
@@ -39,12 +55,13 @@
                 <th>Location</th>
                 <th>Tags</th>
                 <th>Author</th>
+                <th>Created Date</th>
                 <th style="width: 40px">Action</th>
                 </tr>
                 </thead>
                 <tbody>
-                  @if($post->count())
-                @foreach($post as $post)
+                  @if($posts->count())
+                @foreach($posts as $post)
                 <tr>
                 <td>{{ $post->id }}</td>
                 <td>
@@ -61,6 +78,9 @@
                   
                 </td>
                 <td>{{ $post->account->username }}</td>
+
+                <td>{{ $post->created_at->format('d M,Y') }}</td>
+
                 <td class="d-flex">
                   <a href="{{ route('post.show', [$post->id]) }}" class="btn btn-sm btn-success mr-1"> <i class="fas fa-eye"></i> </a>
                   <a href="{{ route('post.edit', [$post->id]) }}" class="btn btn-sm btn-primary mr-1"><i class="fas fa-edit"></i></a>
@@ -87,6 +107,27 @@
                 
                 </div>
         </div>
+      </div>
+    </div>
+   </div>
+   <div class="card-footer">
+    <div class="row text-center pt-5 border-top">
+      <div class="col-md-12">
+        <ul class="pagination pagination-sm m-0 float-right">
+        
+          @if($posts->currentPage() > 1)
+          <li class="page-item"><a class="page-link"  href="{{ $posts->previousPageUrl() }}"><</a></li>
+          @endif
+  
+          @for($i = 1; $i <= $posts->lastPage(); $i++)
+          <li class="page-item"><a class="page-link"  href="{{ $posts->url($i) }}">{{ $i }}</a></li>
+          @endfor
+  
+          @if($posts->currentPage() < $posts->lastPage())
+          <li class="page-item"><a class="page-link"   href="{{ $posts->nextPageUrl() }}">></a></li>
+          @endif
+        </ul>
+       
       </div>
     </div>
    </div>

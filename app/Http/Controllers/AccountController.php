@@ -5,12 +5,15 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Http\Middleware\Account;
 use App\Models\Account as ModelsAccount;
+
 use App\Models\User;
-use Auth;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Model;
+
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth as FacadesAuth;
 use Image;
-use Session;
+use Illuminate\Support\Facades\Session;
 
 class AccountController extends Controller
 {
@@ -103,6 +106,8 @@ class AccountController extends Controller
             }else{
                 $imageName = "";
             }
+
+
 
             //Update Profile
            ModelsAccount::where('email',Auth::guard('admin')->user()->email)->Update(['username'=>$data['user_name'],'mobile'=>$data['phone_num'],'image'=>$imageName]);
