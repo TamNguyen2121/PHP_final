@@ -18,6 +18,7 @@ class PostController extends Controller
      */
     public function index()
     {
+
         $postKey = request()->input('postKey');
         $postQuery = Post::orderBy('created_at', 'ASC')
         ->select('posts.*', 'locations.name as location_name', 'accounts.username as author')
@@ -36,8 +37,9 @@ class PostController extends Controller
             });
         }
     
-        $post = $postQuery->paginate(20);
-        return view('admin.Post.index',compact('post'));
+        $posts = $postQuery->paginate(20);
+        return view('admin.post.index',compact('posts'));
+
     }
 
     /**
@@ -60,12 +62,12 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request->all());
+        // dd();
         $this->validate($request, [
             'title' => 'required',
             'image' => 'required|image',
             'content' => 'required',
-            'account_id'=>'required',
+            // 'account_id'=>'required',
             'location' => 'required',
         ]);
 
@@ -73,7 +75,7 @@ class PostController extends Controller
             'title' => $request->title,
             'image' => 'image.jpg',
             'content' => $request->content,
-            'account_id' => $request->account_id,
+            'account_id' => auth()->guard('admin')->user()->id,
             'location_id' => $request->location,
             'published_at' => Carbon::now(),
         ]);
@@ -173,4 +175,18 @@ class PostController extends Controller
 
         return redirect()->back();
     }
+
+
+    // public function countPostsByAddress($LocationId)
+    // {
+    //     $locations = Location::all(); 
+
+    //     $postCounts = []; 
+    
+    //     foreach ($locations as $location) {
+    //         $postCounts[$location->id] = $this->countPostsByAddress($location->id);
+    //     }
+    //     return $postCounts;
+    // }
+
 }

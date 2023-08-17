@@ -13,6 +13,7 @@ class LocationController extends Controller
      */
     public function index()
     {
+
         $locationKey = request()->input('locationKey');
         $locationQuery = Location::orderBy('created_at', 'ASC');
     
@@ -21,12 +22,22 @@ class LocationController extends Controller
                 $subQuery->where('id', '=', $locationKey)
                          ->orWhere('name', 'like', '%' . $locationKey . '%')
                          ->orWhere('address', 'like', '%' . $locationKey . '%');
-            });
+            }); $location = $locationQuery->paginate(7);
+
         }
-    
-        $location = $locationQuery->paginate(20);
-        return view('admin.Location.index', compact('location'));
-       
+      else{
+        $locations = $locationQuery->paginate(7);
+      }
+        
+        foreach($locations as $value){
+            // dd($value->posts->count());
+            $value->count = $value->posts->count();
+        }
+        // dd($location);
+        return view('admin.Location.index', compact('locations'));
+
+
+
     }
 
     /**

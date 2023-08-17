@@ -14,6 +14,7 @@ class TagController extends Controller
      */
     public function index()
     {
+
         $tagKey = request()->input('tagKey');
         $tagQuery = Tag::orderBy('created_at', 'ASC');
     
@@ -25,8 +26,9 @@ class TagController extends Controller
             });
         }
     
-        $Tag = $tagQuery->paginate(20);    
-        return view('admin.Tag.index', compact('Tag'));
+        $Tags = $tagQuery->paginate(20);    
+        return view('admin.Tag.index', compact('Tags'));
+      
     }
 
     /**

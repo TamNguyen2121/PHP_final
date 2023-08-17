@@ -14,9 +14,13 @@ return new class extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
+            $table->tinyInteger('gender')->default(2);
+            $table -> date('Date_of_Birth');
+            $table->unsignedBigInteger('account_id');
             $table->timestamps();
+        });
+        Schema::table('users', function (Blueprint $table) {
+            $table ->foreign('account_id')->references('id')->on('accounts');
         });
     }
 

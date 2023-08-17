@@ -17,6 +17,7 @@
         </div>
     </div>
 
+
     <div class="site-section">
     <div class="container">
       <div class="row mb-5">
@@ -29,6 +30,7 @@
           <div class="entry2">
             <a href="single.html"><img src ="{{ asset('website') }}/images/img_1.jpg" alt="Image" class="img-fluid rounded"></a>
             <div class="excerpt">
+
 
             <h2><a href="single.html">CHIA SẺ KINH NGHIỆM DU LỊCH</a></h2>
             
