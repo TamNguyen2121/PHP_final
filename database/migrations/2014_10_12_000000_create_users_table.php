@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->tinyInteger('gender')->default(2);
-            $table -> date('Date_of_Birth');
+            $table -> date('birthday');
             $table->unsignedBigInteger('account_id');
             $table->timestamps();
         });

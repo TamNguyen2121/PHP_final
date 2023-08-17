@@ -15,6 +15,8 @@ class Account extends Authenticatable
         'username',
         'email',
         'password',
+        'mobile',
+        'type',
     ];
 
     protected $hidden = [

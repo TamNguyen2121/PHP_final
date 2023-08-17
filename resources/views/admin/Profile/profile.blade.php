@@ -19,6 +19,31 @@
   
 <!-- Main content -->
 <section class="content">
+  @if(Session::has('error_message'))  
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <strong>Error:</strong> {{ Session::get('error_message') }}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    @endif
+    @if(Session::has('success_message'))  
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <strong>Success:</strong> {{ Session::get('success_message') }}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    @endif
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
       <div class="container-fluid">
         <div class="row">
           <!-- left column -->
@@ -29,31 +54,6 @@
                 <h3 class="card-title">Edit Profile</h3>
               </div>
               <!-- /.card-header -->
-              @if(Session::has('error_message'))  
-                <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                    <strong>Error:</strong> {{ Session::get('error_message') }}
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                @endif
-                @if(Session::has('success_message'))  
-                <div class="alert alert-success alert-dismissible fade show" role="alert">
-                    <strong>Success:</strong> {{ Session::get('success_message') }}
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                @endif
-                @if ($errors->any())
-                    <div class="alert alert-danger">
-                        <ul>
-                            @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
-                    </div>
-                @endif
               <!-- form start -->
               <form method="post" action="{{ url('admin/profile') }}" enctype="multipart/form-data">@csrf
                 <div class="card-body">
@@ -86,12 +86,57 @@
             </div>
             <!-- /.card -->
           </div>
+
           <!--/.col (right) -->
+          <div class="col-md-6">
+            <!-- general form elements -->
+            <div class="card card-primary">
+              <div class="card-header">
+                <h3 class="card-title">Edit User Info</h3>
+              </div>
+              <!-- /.card-header -->
+
+              <!-- form start -->
+              <form method="post" action="{{ url('admin/edituser') }}" enctype="multipart/form-data">@csrf
+                <div class="card-body">
+                  <!-- <div class="form-group">
+                    <label for="admin_email">Email address</label>
+                    <input class="form-control" id="admin_email" value="{{ Auth::guard('admin')->user()->email }}" readonly='' style="background-color:aliceblue ">
+                  </div> -->
+                  <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" class="form-control" name="name" id="name" placeholder="Name" value="{{ Auth::guard('admin')->user()->name }}">
+                  </div>
+                  <div class="form-group">
+                  <div class="form-group">
+                    <label for="name">Gender</label><br>
+                    <input type="radio" name="gender" value="1" {{ Auth::guard('admin')->user()->gender == 1 ? 'checked' : '' }}>
+                    <label for="male">Male</label><br>
+                    <input type="radio" name="gender" value="2" {{ Auth::guard('admin')->user()->gender == 2 ? 'checked' : '' }}>
+                    <label for="male">Female</label><br>
+                  </div>
+                  <div class="form-group">
+                    <label for="birthday">Birthday:</label>
+                    <input type="date" class="form-control" id="birthday" name="birthday">
+                  </div>
+                  <div class="form-group">
+                    <label for="account_id">Account_Id</label>
+                    <input type="text" class="form-control" name="account_id" id="account_id" placeholder="Name" value="{{ Auth::guard('admin')->user()->id }}">
+                  </div>
+                </div>
+                <!-- /.card-body -->
+                <div class="card-footer">
+                  <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+              </form>
+            </div>
+            <!-- /.card -->
+          </div>
+
         </div>
         <!-- /.row -->
       </div><!-- /.container-fluid -->
     </section>
-    <!-- /.content -->
   
   </div>
 @endsection

@@ -61,11 +61,19 @@ Route::prefix('/admin')->namespace('App\Http\Controllers')->group(function(){
     Route::group(['middleware'=>['account']], function(){
         Route::get('dashboard', 'DashboardController@index')->name('dashboard');
         Route::match(['get','post'],'profile','AccountController@profile');
-        Route::get('logout','AccountController@logout');
+        Route::match(['get','post'],'edituser','AccountController@edituser');
         Route::resource('location', LocationController::class);
         Route::resource('Tag',TagController::class);
         Route::resource('post',PostController::class );
-         // Contact
+
+        
+        Route::get('logout','AccountController@logout');
+
+        Route::get('user','AccountController@subadmins');
+        Route::post('update-subadmin-status','AccountController@updateSubadminStatus');
+        Route::match(['get','post'],'add-edit-subadmin/{id?}','AccountController@addEditSubadmin');
+        Route::get('delete-subadmin/{id?}','AccountController@deleteSubadmin');
+   // Contact
     // Route::get('/contact','ContactController@index')->name('contact.index');
     Route::get('/contact', [ContactController::class, 'index'])->name('contact.index');
     Route::get('/contact/show/{id}', [ContactController::class, 'show'])->name('contact.show');
@@ -75,6 +83,7 @@ Route::prefix('/admin')->namespace('App\Http\Controllers')->group(function(){
    Route::get('/search', function()
     {
         return view('website.search');
+
     });
     Route::get('/search', [FrontendController::class, 'search'])->name('search.result');
         
