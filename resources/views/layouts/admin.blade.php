@@ -151,10 +151,10 @@
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="index3.html" class="brand-link ml-3">
-      <img src="{{ asset('admin')}}/img/caption.jpg" alt="AdminLTE Logo" class=" rounded-circle "
-      style="width:40px; height:40px";>
-      <span class="brand-text font-weight-light">TravelExplorer</span>
+    <a href="index3.html" class="brand-link ml-3 " >
+      {{-- <img src="{{ asset('admin')}}/img/caption.jpg" alt="AdminLTE Logo" class=" rounded-circle "
+      style="width:40px; height:40px";> --}}
+      <span class="brand-text font-weight-light"><h2>TravelExplorer</h2></span>
     </a>
 
     <!-- Sidebar -->
@@ -230,12 +230,12 @@
 
   
      <li class="nav-item mt-auto ">
-        @if(Session::get('page')=="user")
+        {{-- @if(Session::get('page')=="user")
               @php $active="active" @endphp
           @else
               @php $active = "" @endphp
-          @endif
-            <a href="{{ url('admin/user') }}" class="nav-link {{ $active }}">
+          @endif --}}
+            <a href="{{ url('admin/user') }}" class="nav-link ">
             <i class="nav-icon fas fa-solid fa-users"></i>
               <p>
                 Users
@@ -244,11 +244,11 @@
           </li>
 
           <!-- <li class="nav-item mt-auto ">
-          @if(Session::get('page')=="profile")
+          {{-- @if(Session::get('page')=="profile")
               @php $active="active" @endphp
           @else
               @php $active = "" @endphp
-          @endif
+          @endif --}}
             <a href="#" class="nav-link">
             <i class="nav-icon fas fa-solid fa-user-plus"></i>
               <p>
@@ -258,12 +258,12 @@
           </li> -->
 
           <li class="nav-item mt-auto">
-          @if(Session::get('page')=="profile")
+          {{-- @if(Session::get('page')=="profile")
               @php $active="active" @endphp
           @else
               @php $active = "" @endphp
-          @endif
-            <a href="{{ url('admin/profile') }}" class="nav-link {{ $active }}">
+          @endif --}}
+            <a href="{{ url('admin/profile') }}" class="nav-link ">
             <i class="nav-icon fas fa-regular fa-address-book"></i>
               <p>
                 Profile
